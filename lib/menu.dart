@@ -1,21 +1,28 @@
 import 'package:flutter/material.dart';
 
+class Item{
+  final String name;
+  final IconData icon;
+  final Color color;
+
+  Item(this.name, this.icon, this.color);
+}
+
 class MyHomePage extends StatelessWidget {
   MyHomePage({Key? key}) : super(key: key);
 
-  final List<FoodIngredients> ingredients = [
-    FoodIngredients("Lihat Bahan Makanan", Icons.food_bank_rounded),
-    FoodIngredients("Tambah Bahan Makanan", Icons.add_circle_rounded),
-    FoodIngredients("Logout", Icons.logout_rounded),
+  final List<Item> items = [
+    Item("Lihat Item", Icons.food_bank_rounded,Colors.pink[100]!),
+    Item("Tambah Item", Icons.add_circle_rounded,Colors.orange[200]!),
+    Item("Logout", Icons.logout_rounded, Colors.cyan[300]!),
   ];
 
-  @override
+@override
 Widget build(BuildContext context) {
   return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          "Laras' Adorable Home",
-        ),
+        title: const Text("Laras' Adorable Home"),
+        backgroundColor: const Color.fromRGBO(199, 133, 249,1.0),
       ),
       body: SingleChildScrollView(
         // Widget wrapper yang dapat discroll
@@ -28,7 +35,7 @@ Widget build(BuildContext context) {
                 padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
                 // Widget Text untuk menampilkan tulisan dengan alignment center dan style yang sesuai
                 child: Text(
-                  'Ingredients Collection', // Text yang menandakan toko
+                  'Food Ingredients Collection', // Text yang menandakan nama inventory
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 30,
@@ -36,6 +43,7 @@ Widget build(BuildContext context) {
                   ),
                 ),
               ),
+
               // Grid layout
               GridView.count(
                 // Container pada card kita
@@ -45,9 +53,9 @@ Widget build(BuildContext context) {
                 mainAxisSpacing: 10,
                 crossAxisCount: 3,
                 shrinkWrap: true,
-                children: ingredients.map((ingredient) {
+                children: items.map((item) {
                 // Iterasi untuk setiap item
-                return ShopCard(ingredient);
+                return ItemCard(item);
                 }).toList(),
               ),
             ],
@@ -58,22 +66,14 @@ Widget build(BuildContext context) {
 }
 }
 
-class FoodIngredients{
-  final String name;
-  final IconData icon;
+class ItemCard extends StatelessWidget {
+  final Item item;
 
-  FoodIngredients(this.name, this.icon);
-}
-
-class ShopCard extends StatelessWidget {
-  final FoodIngredients ingredients;
-
-  const ShopCard(this.ingredients, {Key? key}) : super(key: key); // Constructor
+  const ItemCard(this.item, {Key? key}) : super(key: key); // Constructor
 
   @override
   Widget build(BuildContext context) {
     return Material(
-      color: Colors.indigo,
       child: InkWell(
         // Area responsive terhadap sentuhan
         onTap: () {
@@ -81,23 +81,24 @@ class ShopCard extends StatelessWidget {
           ScaffoldMessenger.of(context)
             ..hideCurrentSnackBar()
             ..showSnackBar(SnackBar(
-                content: Text("Kamu telah menekan tombol ${ingredients.name}!")));
+                content: Text("Kamu telah menekan tombol ${item.name}!")));
         },
         child: Container(
           // Container untuk menyimpan Icon dan Text
           padding: const EdgeInsets.all(8),
+          color: item.color,
           child: Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Icon(
-                  ingredients.icon,
+                  item.icon,
                   color: Colors.white,
                   size: 30.0,
                 ),
                 const Padding(padding: EdgeInsets.all(3)),
                 Text(
-                  ingredients.name,
+                  item.name,
                   textAlign: TextAlign.center,
                   style: const TextStyle(color: Colors.white),
                 ),
