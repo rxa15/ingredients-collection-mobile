@@ -15,7 +15,9 @@ class MyApp extends StatelessWidget {
       title: 'Ingredients Collection',
       theme: ThemeData(
         scaffoldBackgroundColor: const Color.fromARGB(255, 228, 203, 232), // Background color
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.cyan.shade100)),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.cyan.shade100),
+        useMaterial3: true,
+        ),
       home: MyHomePage(),
     );
   }
