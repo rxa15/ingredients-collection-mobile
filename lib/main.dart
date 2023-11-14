@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ingredients_collection_mobile/menu.dart';
+import 'package:ingredients_collection_mobile/screens/menu.dart';
 
 void main() {
   runApp(const MyApp());
@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.cyan.shade100),
         useMaterial3: true,
         ),
-      home: MyHomePage(),
+      home: HomePage(),
     );
   }
 }
