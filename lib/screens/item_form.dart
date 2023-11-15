@@ -197,5 +197,3 @@ class _ItemFormPageState extends State<ItemFormPage> {
     );
   }
 }
-
-  
