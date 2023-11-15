@@ -71,7 +71,6 @@ Perbedaan dari kedua *method* ini terletak pada efek yang diberikan terhadap *ro
                     ));
             }
     ```
-    <p align="center"><img src="https://assets.alexandria.raywenderlich.com/books/be0da83c17e547776b6ff910c5109b836d4b642faedff5a9a04d18d4375714e0/images/bde0b6e4cef230476149c8cf3f728e8076a630e3909e42389ae8b658f7087192/original.png" width=900></p>
 - `Navigator.pushReplacement()`
     Menggantikan *route* yang sedang di posisi paling atas pada *navigation stack* dengan sebuah *route* baru dan menghapus *route* yang diganti. Contoh penggunaannya dalam tugas ini adalah:
     ```
