@@ -1,6 +1,7 @@
 # Tugas Aplikasi Inventory Mobile
 - [Tugas 7](#tugas-7)
 - [Tugas 8](#tugas-8)
+- [Tugas 9](#tugas-9)
 
 ## Tugas 7 
 ### Perbedaan Utama Antara *Stateless* dan *Stateful Widget* dalam Konteks Pengembangan Aplikasi Flutter
@@ -327,3 +328,23 @@ class LeftDrawer extends StatelessWidget {
 }
 ```
 -----------------------------------------------------------------------------------------------------
+## Tugas 9
+### Apakah Pengambilan Data JSON Dapat Dilakukan Tanpa Model?
+Pengambilan data JSON dapat dilakukan tanpa membuat model terlebih dahulu. Cara-cara yang dapat dilakukan untuk mengimplementasikannya adalah dengan menggunakan:
+- `dart:convert`:
+  Library Dart ini dapat digunakan untuk melakukan *encoding* dan *decoding* dari format data seperti JSON, UTF-8, UTF-16, dan base64. Terdapat class `json` pada library ini yang mengandung fungsi yang dapat mengubah *strings* JSON menjadi objek Dart dan sebaliknya (`json.decode` & `json.encode`).
+- `package:http/http.dart' as http` atau `package:dio/dio.dart`:
+  Package tersebut dapat melakukan *parsing* terhadap *strings* JSON
+Pengambilan data JSON tanpa membuat model bisa dilakukan menggunakan cara-cara di atas ketika kita ingin membuat aplikasi kita lebih sederhana karena kita tidak perlu membuat model. Namun, pendekatan ini dapat menjadi kurang efektif saat data JSON yang kita gunakan sering berubah (*less maintanable code*), terutama ketika data yang digunakan kompleks. Selain itu, proses *parsing* dan *manipulation* dari data JSON di dalam aplikasi kita juga cenderung kurang berstruktur karena tidak ada model yang mengatur struktur data di aplikasi. Hal ini juga akan semakin sulit ketika struktur API dari kode kita sering berubah atau ketika data yang diolah sangat kompleks.
+### Penjelasan Fungsi dari `CookieRequest` dan Mengapa *Instance*-nya Perlu Dibagikan Ke Semua Komponen di Aplikasi Flutter
+Fungsi dari `CookieRequest` adalah membantu pembuatan HTTP Request ke *backend* Django tanpa kita perlu mengatur *cookies* dari data yang dikirimkan dari Django. *Instance*-nya perlu dibagikan ke semua komponen di aplikasi Flutter agar setiap komponen dapat menyimpan *cookies* yang diperlukan untuk *request* lain seperti meminta daftar barang yang disimpan oleh pengguna di aplikasi *inventory*. 
+### Mekanisme Pengambilan Data dari JSON hingga Dapat Ditampilkan pada Flutter
+1. *Package* Flutter `pbp_django_auth` melakukan kontak dengan *web service* Django sehingga data JSON dapat diambil dari Django menggunakan GET *request*.
+2. Data yang diterima akan diolah oleh Flutter dengan menggunakan model pengambilan data JSON.
+3. Model akan ditampilkan melalui *widget* `FutureBuilder` yang akan menunggu terjadinya HTTP *request* secara *asynchronous* lalu mengembalikan dan menampilkan data JSON pada *widget*-*widget* lain yang telah terhubung dengan `pbp_django_auth`.
+### Mekanisme Autentikasi Input Data Akun pada Flutter ke Django dan Tampilnya Menu pada Flutter
+1. *Package* Flutter `pbp_django_auth` melakukan kontak dengan *web service* Django sehingga input data akun Flutter dapat dikirim ke Django menggunakan POST *request*.
+2. Data tersebut kemudian diproses oleh Django lalu dikembalikan melalui sebuah respon yang menandakan autentikasi pengguna.
+3. Jika pengguna terautentikasi oleh Django, tampilan akan berubah menjadi halaman menu. Akan tetapi, tampilan tidak akan berubah ketika pengguna gagal terautentikasi. 
+### Penjelasan Fungsi Widget yang Digunakan pada Tugas Ini
+### Implementasi Checklist
