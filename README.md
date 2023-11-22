@@ -367,3 +367,5 @@ Saya memasukkan data yang ada pada *endpoint* JSON dari tugas Django ke website 
 Halaman yang menampilkan daftar semua item di Django terletak pada berkas `list_item.dart`. Isi berkas tersebut mirip seperti isi berkas `list_product.dart` yang ada pada tutorial tetapi telah dimodifikasi sesuai dengan *fields* yang akan ditampilkan di daftar item, yaitu `name`, `amount`, dan `description`.
 #### Membuat Halaman yang Menampilkan Detail Setiap Item dari Django
 Halaman yang menampilkan detail setiap item dari item pada daftar item terletak pada berkas `item_detail.dart`. Halaman ini berisi detail *fields* setiap item, yaitu `name`, `category`, `amount`, dan `description` yang tampilannya dipisahkan dengan `SizedBox`. Halaman ini dapat diakses ketika pengguna memencet suatu item pada daftar item. Pengguna juga dapat kembali ke halaman sebelumnya ketika menekan tombol `Back`. 
+
+-----------------------------------------------------------------------------------------------------
