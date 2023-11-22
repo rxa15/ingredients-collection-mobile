@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:ingredients_collection_mobile/screens/menu.dart';
 // Import drawer widget
 import 'package:ingredients_collection_mobile/widgets/left_drawer.dart';
+import 'package:pbp_django_auth/pbp_django_auth.dart';
+import 'package:provider/provider.dart';
+import 'dart:convert';
 
 class ItemFormPage extends StatefulWidget {
     const ItemFormPage({super.key});
@@ -19,6 +22,7 @@ class _ItemFormPageState extends State<ItemFormPage> {
 
   @override
   Widget build(BuildContext context) {
+    final request = context.watch<CookieRequest>();
     return Scaffold(
       appBar: AppBar(
         title: const Center(
@@ -147,41 +151,32 @@ class _ItemFormPageState extends State<ItemFormPage> {
                   style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.all(const Color.fromRGBO(199, 133, 249,1.0)),
                   ),
-                  onPressed: () {
+                  onPressed: () async {
                     if (_formKey.currentState!.validate()) {
-                      showDialog(
-                        context: context,
-                        builder: (context) {
-                          return AlertDialog(
-                            title: const Text('Item berhasil tersimpan!'),
-                            content: SingleChildScrollView(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text('Nama Item: $_name'),
-                                  Text('Kategori: $_category'),
-                                  Text('Jumlah: $_amount'),
-                                  Text('Deskripsi: $_description')
-                                ],
-                              ),
-                            ),
-                            actions: [
-                              TextButton(
-                                child: const Text('OK'),
-                                onPressed: () {
-                                  Navigator.pop(context);
-                                  // Kembali ke homepage setelah dipencet "OK"
-                                  Navigator.pushReplacement(
-                                    context,
-                                    MaterialPageRoute(
-                                    builder: (context) => HomePage(),
-                                    ));
-                                },
-                              )
-                            ],
-                          );
+                      final response = await request.postJson(
+                        "http://127.0.0.1:8000/create-flutter/",
+                        jsonEncode(<String, String>{
+                            'name': _name,
+                            'category': _category,
+                            'amount': _amount.toString(),
+                            'description': _description,
+                        }));
+                        if (response['status'] == 'success') {
+                            ScaffoldMessenger.of(context)
+                                .showSnackBar(const SnackBar(
+                            content: Text("Successful!"),
+                            ));
+                            Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(builder: (context) => HomePage()),
+                            );
+                        } else {
+                            ScaffoldMessenger.of(context)
+                                .showSnackBar(const SnackBar(
+                                content:
+                                    Text("Try again!"),
+                            ));
                         }
-                      );
                     }
                   },
                   child: const Text(

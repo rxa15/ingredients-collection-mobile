@@ -348,4 +348,22 @@ Fungsi dari `CookieRequest` adalah membantu pembuatan HTTP Request ke *backend* 
 2. Data tersebut kemudian diproses oleh Django lalu dikembalikan melalui sebuah respon yang menandakan autentikasi pengguna.
 3. Jika pengguna terautentikasi oleh Django, tampilan akan berubah menjadi halaman menu. Akan tetapi, tampilan tidak akan berubah ketika pengguna gagal terautentikasi. 
 ### Penjelasan Fungsi Widget yang Digunakan pada Tugas Ini
+- `FutureBuilder`:
+  digunakan untuk membuat *widget* lain secara *asynchronous* 
+- `CircularProgressIndicator`:
+  digunakan untuk menampilkan visual bahwa suatu halaman sedang dalam proses *loading*
+- `TextEditingController`:
+  berfungsi sebagai *event listener* dari sebuah TextField ketika terjadi perubahan di dalamnya
+- `SizedBox`:
+  berfungsi sebagai *widget* yang membuat sebuah area berbentuk kotak dengan tinggi dan lebar yang ditetapkan. *Widget* ini berguna seperti sebagai sebuah *container* yang memisahkan tampilan suatu bagian dengan bagian lain.
 ### Implementasi Checklist
+NOTES: proyek Django saya masih belum bisa di-*deploy* sehingga saya masih menggunakan *localhost* 🥲 😔
+#### Membuat Halaman Login + Mengintegrasikan Sistem Autentikasi Django dengan Proyek Tugas Flutter
+1. Sebelum membuat halaman login, saya mengintegrasikan autentikasi Django dengan Flutter. Proses autentikasi akan diatur dalam *folder* `authentication`. Kemudian, saya memodifikasi *root widget* di *folder* lib untuk menyediakan *library* `CookieRequest` ke semua *child widgets* dengan menggunakan `Provider`. Hal ini bertujuan untuk membagikan *instance* `CookieRequest` dengan semua komponen yang ada di aplikasi.
+2. Kemudian, saya membuat halaman login yang diatur oleh berkas `login.dart` pada *folder* `screens`.
+#### Membuat Model Kustom Sesuai dengan Proyek Aplikasi Django
+Saya memasukkan data yang ada pada *endpoint* JSON dari tugas Django ke website Quicktype. Kemudian, saya menyesuaikan *fields* yang ada di Quicktype agar sesuai dengan proyek aplikasi Django saya.
+#### Membuat Halaman yang Menampilkan Daftar Semua Item dari Django
+Halaman yang menampilkan daftar semua item di Django terletak pada berkas `list_item.dart`. Isi berkas tersebut mirip seperti isi berkas `list_product.dart` yang ada pada tutorial tetapi telah dimodifikasi sesuai dengan *fields* yang akan ditampilkan di daftar item, yaitu `name`, `amount`, dan `description`.
+#### Membuat Halaman yang Menampilkan Detail Setiap Item dari Django
+Halaman yang menampilkan detail setiap item dari item pada daftar item terletak pada berkas `item_detail.dart`. Halaman ini berisi detail *fields* setiap item, yaitu `name`, `category`, `amount`, dan `description` yang tampilannya dipisahkan dengan `SizedBox`. Halaman ini dapat diakses ketika pengguna memencet suatu item pada daftar item. Pengguna juga dapat kembali ke halaman sebelumnya ketika menekan tombol `Back`. 

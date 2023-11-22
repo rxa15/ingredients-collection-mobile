@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ingredients_collection_mobile/screens/list_item.dart';
 import 'package:ingredients_collection_mobile/screens/menu.dart';
 import 'package:ingredients_collection_mobile/screens/item_form.dart';
 
@@ -49,6 +50,15 @@ class LeftDrawer extends StatelessWidget {
                           MaterialPageRoute(builder: (context) => ItemFormPage()));
                   },
                 ),
+                ListTile(
+                  leading: const Icon(Icons.grid_view_outlined),
+                  title: const Text('Lihat Item'),
+                  // Redirect to Lihat Item page
+                  onTap: (){
+                    Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => const ItemPage()));
+                  },
+                )
             ],
             ),
         );
